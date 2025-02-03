@@ -14,11 +14,11 @@ Preprocessing is **crucial** before training an LLM because:
 
 ## 🛠️ Features of `preprocess_data.py`
 This script:
-✅ **Removes non-ASCII characters** (e.g., unwanted symbols)
-✅ **Ensures proper spacing after punctuation** (avoids merging words)
-✅ **Cleans excessive whitespace and newlines**
-✅ **Preserves paragraph structure** (no forced splitting)
-✅ **Prepares text for tokenization & model training**
+- ✅ **Removes non-ASCII characters** (e.g., unwanted symbols)
+- ✅ **Ensures proper spacing after punctuation** (avoids merging words)
+- ✅ **Cleans excessive whitespace and newlines**
+- ✅ **Preserves paragraph structure** (no forced splitting)
+- ✅ **Prepares text for tokenization & model training**
 
 ---
 
