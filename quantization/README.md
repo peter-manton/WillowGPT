@@ -1,6 +1,6 @@
 # 🚀 Post-Training Quantization for Hugging Face Models
 
-This repository contains a **Post-Training Quantization (PTQ) script** for Hugging Face Transformer models. The script converts large models to **FP16 (Half Precision)** format for **GPU acceleration**, improving inference speed while reducing model size.
+This repository contains a **Post-Training Quantization (PTQ) script** for Hugging Face Transformer models. The script converts large models to **FP16 (Half Precision)** format for **GPU acceleration**, improving inference speed while reducing model size. This is a one-time operation and further quantization will not have any benefit.
 
 ---
 
