@@ -1,5 +1,5 @@
 # Install: https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda_12.8.0_571.96_windows.exe
-# Install: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+# Install: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 && pip install datasets transformers
 # Restart computer & run script.
 
 import os
@@ -15,7 +15,7 @@ def model_exists():
     return os.path.exists(MODEL_DIR) and os.path.isdir(MODEL_DIR)
 
 if __name__ == "__main__":
-    print(f"PyTorch is using device: {torch.device('cuda' if torch.cuda.is_available() else 'cpu')}")
+    print(f"Info: PyTorch is using device: {torch.device('cuda' if torch.cuda.is_available() else 'cpu')}")
 
     # Load the tokenizer
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
@@ -23,11 +23,11 @@ if __name__ == "__main__":
 
     # Check if a trained model exists
     if model_exists():
-        print("✅ Found existing trained model, loading...")
+        print("Info: ✅ Found existing trained model, loading...")
         model = GPT2LMHeadModel.from_pretrained(MODEL_DIR)
         tokenizer = GPT2Tokenizer.from_pretrained(MODEL_DIR)
     else:
-        print("🚀 No trained model found, training from scratch...")
+        print("Info: No trained model found, training from scratch...")
 
         # Load dataset
         dataset_path = "wind_in_the_willows.txt"
@@ -101,13 +101,13 @@ if __name__ == "__main__":
         )
 
         # Train the model
-        print("🚀 Training about to start...")
+        print("Info: Training about to start...")
         trainer.train()
 
         # Save trained model for future use
         model.save_pretrained(MODEL_DIR)
         tokenizer.save_pretrained(MODEL_DIR)
-        print("✅ Model training complete and saved.")
+        print("Info: ✅ Model training complete and saved.")
 
     # Function to generate text using the trained model
     def generate_text(prompt=None, max_length=100):
