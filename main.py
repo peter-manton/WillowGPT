@@ -120,14 +120,18 @@ if __name__ == "__main__":
         # Tokenize input and move to the same device as the model
         inputs = tokenizer(input_text, return_tensors="pt").to(model.device)
 
+        # I performed some inference optimisation below to iprove output from the model (see items with 'originally')
         with torch.no_grad():
             output = model.generate(
                 **inputs,
                 max_length=max_length,
                 do_sample=True,
-                temperature=0.9,  # Controls randomness
-                top_k=50,         # Limits sampling to top 50 words
-                top_p=0.95,       # Nucleus sampling
+                temperature=0.7,  # Controls randomness (originally 0.9 / reduce temperature for less randomness)
+                top_k=50,         # Limits sampling to top 50 words (originally 50 / reduce top-k for better variety)
+                top_p=0.9,        # Nucleus sampling (originally 0.95 / lower top-p for controlled diversity)
+                repetition_penalty=1.2, # Add penalty to avoid word loops (originally not present)
+                no_repeat_ngram_size=3, # Prevents repeating n-grams (phrases) (originally not present)
+                early_stopping=True, # Stops generation if repetition is detected (originally not present)
                 use_cache=True,
             )
         return tokenizer.decode(output[0], skip_special_tokens=True)
